@@ -6,3 +6,8 @@ plugins {
 	id("openapi-module-generator")
 }
 
+openApiModules {
+	include("petstore") {
+		specFile = file("petstore.yaml")
+	}
+}
