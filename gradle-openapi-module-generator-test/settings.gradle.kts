@@ -8,6 +8,6 @@ plugins {
 
 openApiModules {
 	include("petstore") {
-		specFile = file("petstore.yaml")
+		specFile.set(file("petstore.yaml"))
 	}
 }
