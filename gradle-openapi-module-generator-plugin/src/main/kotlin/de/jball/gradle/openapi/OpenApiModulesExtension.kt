@@ -25,6 +25,7 @@ abstract class OpenApiModulesExtension @Inject constructor(
 		configurator.setInputSpec(moduleSpec.specFile.get().toString())
 		configurator.setOutputDir(moduleSpec.outputDirectory.get().toString())
 		configurator.setGeneratorName("kotlin")
+		configurator.addAdditionalProperty("omitGradleWrapper", true)
 
 		DefaultGenerator().opts(configurator.toClientOptInput()).generate()
 
