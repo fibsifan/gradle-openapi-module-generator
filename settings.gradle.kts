@@ -1,5 +1,20 @@
+pluginManagement {
+	includeBuild("gradle-openapi-module-generator-plugin")
+}
+
 plugins {
 	id("org.gradle.toolchains.foojay-resolver-convention") version "0.8.0"
+	id("openapi-module-generator")
 }
-include("gradle-openapi-module-generator-plugin")
+
+rootProject.name = "openapi-module-generator"
+
 include("gradle-openapi-module-generator-test")
+
+openApiModules {
+	module("petstore") {
+		group = "org.example"
+		version = "1.0.0"
+		specFile = file("gradle-openapi-module-generator-test/petstore.yaml")
+	}
+}

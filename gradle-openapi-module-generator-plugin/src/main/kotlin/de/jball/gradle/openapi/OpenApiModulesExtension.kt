@@ -1,35 +1,27 @@
 package de.jball.gradle.openapi
 
 import org.gradle.api.Action
-import org.gradle.api.file.BuildLayout
 import org.gradle.api.initialization.Settings
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.tasks.Input
-import org.openapitools.codegen.DefaultGenerator
-import org.openapitools.codegen.config.CodegenConfigurator
 import javax.inject.Inject
 
 abstract class OpenApiModulesExtension @Inject constructor(
-	private val objects: ObjectFactory, private val settings: Settings) {
+	private val objects: ObjectFactory, settings: Settings) {
 
 	@Input
 	val modulesDir = objects.directoryProperty()
 		.convention(settings.layout.settingsDirectory.dir("openapi-modules"))
 
-	fun include(name: String, spec: Action<OpenApiModuleSpec>) {
-		val moduleSpec = objects.newInstance(OpenApiModuleSpec::class.java)
-		moduleSpec.outputDirectory.convention(modulesDir.dir(name))
-		spec.execute(moduleSpec)
+	internal val modules = mutableListOf<OpenApiModuleSpec>()
 
-		val configurator = CodegenConfigurator()
-		configurator.setInputSpec(moduleSpec.specFile.get().toString())
-		configurator.setOutputDir(moduleSpec.outputDirectory.get().toString())
-		configurator.setGeneratorName("kotlin")
-		configurator.addAdditionalProperty("omitGradleWrapper", true)
+	fun module(name: String, configure: Action<OpenApiModuleSpec>) {
+		val moduleSpec = objects.newInstance(OpenApiModuleSpec::class.java).apply {
+			this.name = name
+			applyConventions(modulesDir)
+		}
 
-		DefaultGenerator().opts(configurator.toClientOptInput()).generate()
-
-		settings.include(name)
-		settings.project(":$name").projectDir = moduleSpec.outputDirectory.get().asFile
+		configure.execute(moduleSpec)
+		modules.add(moduleSpec)
 	}
 }

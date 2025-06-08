@@ -8,7 +8,7 @@ repositories {
 
 dependencies {
 	testImplementation(kotlin("test"))
-	implementation("org.openapitools:openapi-generator:7.8.0")
+	implementation("org.openapitools:openapi-generator:7.13.0")
 }
 
 tasks {
