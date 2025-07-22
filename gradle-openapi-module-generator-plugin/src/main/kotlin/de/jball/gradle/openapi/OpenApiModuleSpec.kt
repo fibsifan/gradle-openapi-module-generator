@@ -31,9 +31,9 @@ abstract class OpenApiModuleSpec @Inject constructor() {
 		version.convention("0.1.0-SNAPSHOT")
 
 		generatorName.convention("kotlin")
-		apiPackage.convention("$packageName.api")
-		modelPackage.convention("$packageName.model")
-		invokerPackage.convention("$packageName.invoker")
+		apiPackage.convention(packageName.map { "$it.api" })
+		modelPackage.convention(packageName.map { "$it.model" })
+		invokerPackage.convention(packageName.map { "$it.invoker" })
 		additionalProperties.convention(mapOf("omitGradleWrapper" to "true"))
 	}
 }
