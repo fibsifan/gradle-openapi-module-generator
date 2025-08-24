@@ -7,7 +7,7 @@ version = "0.1.0-SNAPSHOT"
 
 tasks {
 	wrapper {
-		gradleVersion = "8.14.3"
+		gradleVersion = "9.0.0"
 		distributionType = Wrapper.DistributionType.ALL
 	}
 }
