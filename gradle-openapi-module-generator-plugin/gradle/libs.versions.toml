@@ -1,0 +1,5 @@
+[versions]
+openapi = "7.19.0"
+
+[libraries]
+openapi-generator = { group = "org.openapitools", name = "openapi-generator", version.ref = "openapi" }

@@ -6,11 +6,9 @@ repositories {
 	mavenCentral()
 }
 
-val openapiGeneratorVersion = "7.14.0"
-
 dependencies {
 	testImplementation(kotlin("test"))
-	implementation("org.openapitools:openapi-generator:$openapiGeneratorVersion")
+	implementation(libs.openapi.generator)
 }
 
 tasks {
