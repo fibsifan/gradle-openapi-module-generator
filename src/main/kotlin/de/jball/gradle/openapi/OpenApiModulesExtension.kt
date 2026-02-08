@@ -1,6 +1,7 @@
 package de.jball.gradle.openapi
 
 import org.gradle.api.Action
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.initialization.Settings
 import org.gradle.api.model.ObjectFactory
 import org.gradle.api.tasks.Input
@@ -10,7 +11,7 @@ abstract class OpenApiModulesExtension @Inject constructor(
 	private val objects: ObjectFactory, settings: Settings) {
 
 	@Input
-	val modulesDir = objects.directoryProperty()
+	val modulesDir: DirectoryProperty = objects.directoryProperty()
 		.convention(settings.layout.settingsDirectory.dir("openapi-modules"))
 
 	internal val modules = mutableListOf<OpenApiModuleSpec>()
