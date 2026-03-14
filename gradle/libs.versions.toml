@@ -1,5 +1,12 @@
 [versions]
-openapi = "7.19.0"
+openapi = "7.20.0"
+task-tree = "4.0.1"
+kotlin = "2.3.0"
 
 [libraries]
 openapi-generator = { group = "org.openapitools", name = "openapi-generator", version.ref = "openapi" }
+
+[plugins]
+tasktree = { id = "com.dorongold.task-tree", version.ref = "task-tree" }
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+gradle-plugin = { id = "java-gradle-plugin" }

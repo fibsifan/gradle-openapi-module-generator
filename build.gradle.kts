@@ -1,6 +1,9 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+
 plugins {
-	`kotlin-dsl`
-	id("com.dorongold.task-tree") version "4.0.1"
+	alias(libs.plugins.kotlin.jvm)
+	alias(libs.plugins.tasktree)
+	alias(libs.plugins.gradle.plugin)
 }
 
 group = "de.jball.gradle"
@@ -8,7 +11,13 @@ version = "0.1.0-SNAPSHOT"
 
 
 kotlin {
-	jvmToolchain(17)
+	jvmToolchain(21)
+	compilerOptions {
+		allWarningsAsErrors = true
+		// https://docs.gradle.org/current/userguide/compatibility.html#kotlin
+		apiVersion = KotlinVersion.KOTLIN_2_2
+		languageVersion = apiVersion
+	}
 }
 
 repositories {
@@ -29,7 +38,7 @@ tasks {
 
 tasks {
 	wrapper {
-		gradleVersion = "9.3.1"
+		gradleVersion = "9.4.0"
 		distributionType = Wrapper.DistributionType.ALL
 	}
 }
